@@ -44,10 +44,15 @@ class LocalFileRetriever(DocumentRetriever):
         if not source_path.is_file():
             raise ValueError(f"Source is not a file: {source_path}")
         try:
-            # stat = source_path.stat()
-            # doc_source = DocumentSource(source=source, source_type=SourceType.LOCAL_FILE)
-            # Copy file to destination (placeholder)
-            # TODO: Implement actual file copy logic
-            return source_path
+            import shutil
+
+            # Ensure destination directory exists
+            destination.mkdir(parents=True, exist_ok=True)
+
+            # Copy file to destination directory
+            dest_file = destination / source_path.name
+            shutil.copy2(source_path, dest_file)
+
+            return dest_file
         except Exception as e:
             raise RuntimeError(f"Error retrieving file: {e}") from e

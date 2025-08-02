@@ -25,7 +25,9 @@ class WebHttpRetriever(DocumentRetriever):
         if not source.lower().startswith(("http://", "https://")):
             raise ValueError(f"Invalid URL: {source}")
         try:
-            response = requests.get(source, stream=True, timeout=kwargs.get("timeout", 10))
+            response = requests.get(
+                source, stream=True, timeout=kwargs.get("timeout", 10)
+            )
             response.raise_for_status()
             filename = kwargs.get("filename") or source.split("/")[-1]
             dest_path = destination / filename

@@ -1,5 +1,6 @@
 """Document collection service - main orchestration logic."""
 
+import logging
 import time
 from pathlib import Path
 from typing import Any
@@ -17,15 +18,21 @@ from .models import (
     SourceType,
 )
 
+logger = logging.getLogger(__name__)
+
 
 class DocumentCollectionService:
     """Main service for document collection operations."""
 
     def __init__(self) -> None:
         """Initialize the document collection service."""
+        logger.debug("Initializing DocumentCollectionService")
         self.config = get_config()
         self.retriever_factory = RetrieverFactory()
         self.converter_factory = ConverterFactory()
+        logger.debug(
+            "DocumentCollectionService initialized with config: %s", self.config
+        )
 
     async def collect_document(
         self, source: str, destination_path: Path | None = None, **options: Any
@@ -45,6 +52,8 @@ class DocumentCollectionService:
             DocumentCollectionError: If collection fails
         """
         start_time = time.time()
+        logger.debug("Collecting document from source: %s", source)
+        logger.debug("Options: %s", options)
 
         try:
             # Validate inputs
@@ -120,6 +129,7 @@ class DocumentCollectionService:
                     pass
 
             processing_time = time.time() - start_time
+            logger.debug("Document collection completed in %s seconds", processing_time)
 
             return CollectionResult(
                 success=True,
@@ -135,6 +145,7 @@ class DocumentCollectionService:
         except Exception as e:
             processing_time = time.time() - start_time
             error_msg = str(e)
+            logger.error("Error collecting document: %s", error_msg)
 
             return CollectionResult(
                 success=False,

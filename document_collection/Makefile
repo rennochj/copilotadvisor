@@ -1,4 +1,4 @@
-.PHONY: help setup install dev-install test lint format type-check clean collect-doc collect-docs
+.PHONY: help setup install dev-install test test-coverage lint format type-check clean collect-doc collect-docs
 
 # Default target
 help:
@@ -7,6 +7,7 @@ help:
 	@echo "  install         - Install package"
 	@echo "  dev-install     - Install package in development mode"
 	@echo "  test            - Run tests"
+	@echo "  test-coverage   - Run tests with coverage reporting"
 	@echo "  lint            - Run linting"
 	@echo "  format          - Format code"
 	@echo "  type-check      - Run type checking"
@@ -29,9 +30,16 @@ install:
 dev-install:
 	uv pip install -e .
 
-# Run tests
+# Run tests (without coverage for speed)
 test:
-	pytest
+	pytest tests/ --no-cov
+
+# Run tests with coverage reporting
+test-coverage:
+	@echo "Running tests with coverage..."
+	pytest tests/ --cov=src/document_collection --cov-report=term-missing --cov-report=html
+	@echo ""
+	@echo "Coverage report generated in htmlcov/index.html"
 
 # Run linting
 lint:
@@ -80,7 +88,7 @@ collect-docs:
 	done
 
 # Development workflow
-dev: dev-install lint type-check test
+dev: dev-install lint type-check test-coverage
 
 # CI workflow
-ci: install lint type-check test
+ci: install lint type-check test-coverage

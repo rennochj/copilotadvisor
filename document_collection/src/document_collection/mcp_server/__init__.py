@@ -1,4 +1,5 @@
 """MCP server module."""
 
-# Placeholder for MCP server implementation
-# This will be implemented in Phase 6
+from .server import mcp, run_server, run_server_http
+
+__all__ = ["mcp", "run_server", "run_server_http"]

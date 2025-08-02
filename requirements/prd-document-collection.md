@@ -102,6 +102,8 @@ None specified at this time.
      - make for automation
      - structlog for logging
      - rich for enhanced command-line output
+     - mcp for Model Context Protocol server implementation
+       - search with the tool context7 for documentation on MCP server implementation
 
 
 ### 8.3 Other Considerations

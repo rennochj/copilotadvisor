@@ -11,7 +11,15 @@ class ConverterFactory:
     """Factory to instantiate appropriate converter based on file type."""
 
     @staticmethod
-    def get_converter(source: str) -> PdfConverter | WordConverter | PowerPointConverter | ExcelConverter | MarkdownProcessor:
+    def get_converter(
+        source: str,
+    ) -> (
+        PdfConverter
+        | WordConverter
+        | PowerPointConverter
+        | ExcelConverter
+        | MarkdownProcessor
+    ):
         """Get appropriate converter based on file extension."""
         if source.lower().endswith(".pdf"):
             return PdfConverter()

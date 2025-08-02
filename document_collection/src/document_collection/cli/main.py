@@ -6,8 +6,13 @@ import time
 from pathlib import Path
 
 import click
+from rich.console import Console
+from rich.table import Table
 
 from ..core.service import DocumentCollectionService
+
+# Initialize rich console
+console = Console()
 
 
 @click.group()
@@ -98,6 +103,7 @@ def collect(
         click.echo(f"Unexpected error: {e}", err=True)
         if verbose:
             import traceback
+
             traceback.print_exc()
         sys.exit(1)
 
@@ -184,15 +190,18 @@ def collect_batch(
         click.echo(f"Unexpected error: {e}", err=True)
         if verbose:
             import traceback
+
             traceback.print_exc()
         sys.exit(1)
 
 
 @cli.command()
-def formats() -> None:
+def list_formats() -> None:
     """List supported document formats."""
-    click.echo("Supported Document Formats:")
-    click.echo("=" * 50)
+    table = Table(title="[bold blue]Supported Document Formats[/bold blue]")
+    table.add_column("Format", style="cyan", no_wrap=True)
+    table.add_column("Extension", style="magenta")
+    table.add_column("Description", style="green")
 
     formats_info = [
         ("PDF", ".pdf", "Portable Document Format"),
@@ -203,7 +212,9 @@ def formats() -> None:
     ]
 
     for format_name, extension, description in formats_info:
-        click.echo(f"{format_name:12} {extension:8} - {description}")
+        table.add_row(format_name, extension, description)
+
+    console.print(table)
 
 
 async def _collect_single_document(
@@ -238,26 +249,30 @@ async def _collect_single_document(
 
     if result.success:
         if not quiet:
-            click.echo("✓ Successfully collected document")
-            click.echo(f"  Output: {result.output_path}")
+            console.print("✅ [bold green]Successfully collected document[/bold green]")
+            console.print(f"  📄 Output: [blue]{result.output_path}[/blue]")
             if result.original_path and result.original_path != result.output_path:
-                click.echo(f"  Original: {result.original_path}")
-            click.echo(f"  Processing time: {end_time - start_time:.2f}s")
+                console.print(f"  📁 Original: [blue]{result.original_path}[/blue]")
+            console.print(
+                f"  ⏱️  Processing time: [yellow]{end_time - start_time:.2f}s[/yellow]"
+            )
 
             if verbose and result.metadata:
-                click.echo(f"  Filename: {result.metadata.filename}")
-                click.echo(f"  Format: {result.metadata.format}")
+                console.print(f"  📋 Filename: {result.metadata.filename}")
+                console.print(f"  🔖 Format: {result.metadata.format}")
                 if result.metadata.size_bytes:
-                    click.echo(f"  Size: {result.metadata.size_bytes} bytes")
+                    console.print(f"  📏 Size: {result.metadata.size_bytes} bytes")
         return True
     else:
         if not quiet:
-            click.echo("✗ Failed to collect document")
-            click.echo(f"  Processing time: {end_time - start_time:.2f}s")
+            console.print("❌ [bold red]Failed to collect document[/bold red]")
+            console.print(
+                f"  ⏱️  Processing time: [yellow]{end_time - start_time:.2f}s[/yellow]"
+            )
             for error in result.errors:
-                click.echo(f"  Error: {error}")
+                console.print(f"  🚨 Error: [red]{error}[/red]")
             for warning in result.warnings:
-                click.echo(f"  Warning: {warning}")
+                console.print(f"  ⚠️  Warning: [yellow]{warning}[/yellow]")
         return False
 
 
@@ -274,8 +289,10 @@ async def _collect_multiple_documents(
     service = DocumentCollectionService()
 
     if not quiet:
-        click.echo(f"Collecting {len(sources)} documents")
-        click.echo(f"Destination: {destination}")
+        console.print(f"📦 [bold blue]Collecting {len(sources)} documents[/bold blue]")
+        console.print(
+            f"📁 [bold blue]Destination:[/bold blue] [blue]{destination}[/blue]"
+        )
 
     results = await service.collect_documents(
         sources=sources,
@@ -291,26 +308,63 @@ async def _collect_multiple_documents(
 
     if not quiet:
         if successful:
-            click.echo(f"✓ Successfully collected {len(successful)} documents")
+            console.print(
+                f"✅ [bold green]Successfully collected {len(successful)} documents[/bold green]"
+            )
             if verbose:
                 for result in successful:
-                    click.echo(f"  ✓ {result.source} → {result.output_path}")
+                    console.print(
+                        f"  ✅ [green]{result.source}[/green] → [blue]{result.output_path}[/blue]"
+                    )
 
         if failed:
-            click.echo(f"✗ Failed to collect {len(failed)} documents")
+            console.print(
+                f"❌ [bold red]Failed to collect {len(failed)} documents[/bold red]"
+            )
             for result in failed:
-                click.echo(f"  ✗ {result.source}")
+                console.print(f"  ❌ [red]{result.source}[/red]")
                 if verbose:
                     for error in result.errors:
-                        click.echo(f"    Error: {error}")
+                        console.print(f"    🚨 Error: [red]{error}[/red]")
 
     return len(failed) == 0
+
+
+@cli.command()
+@click.option(
+    "--transport",
+    type=click.Choice(["stdio", "http"]),
+    default="stdio",
+    help="Transport type for MCP server (default: stdio)",
+)
+@click.option(
+    "--port",
+    type=int,
+    default=8000,
+    help="Port for HTTP transport (default: 8000)",
+)
+def mcp_server(transport: str, port: int) -> None:
+    """Run the MCP (Model Context Protocol) server for document collection."""
+    from ..mcp_server.server import run_server, run_server_http
+
+    console.print(
+        "🚀 [bold blue]Starting Document Collection MCP Server...[/bold blue]"
+    )
+    console.print(f"🔗 [bold blue]Transport:[/bold blue] [cyan]{transport}[/cyan]")
+
+    if transport == "http":
+        console.print(f"🌐 [bold blue]Port:[/bold blue] [yellow]{port}[/yellow]")
+        run_server_http(port=port)
+    else:
+        run_server()
 
 
 def main() -> None:
     """Main entry point for the CLI."""
     cli()
 
+
+__all__ = ["cli", "main"]
 
 if __name__ == "__main__":
     main()
