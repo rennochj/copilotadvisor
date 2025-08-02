@@ -46,8 +46,105 @@ pip install document-collection
 
 ### Command Line Interface
 
+The tool provides a comprehensive CLI for document collection:
+
 ```bash
-# Collect a single document
+# Install the package to get the collect-doc command
+pip install -e .
+
+# Or run directly with Python
+python -m document_collection.cli.main --help
+```
+
+#### Basic Commands
+
+```bash
+# Collect a single document from a local file
+collect-doc collect /path/to/document.pdf
+
+# Collect a document from a web URL
+collect-doc collect https://example.com/document.pdf
+
+# Collect with custom destination (default: ./documents)
+collect-doc collect /path/to/document.pdf --destination /custom/path
+
+# Collect without converting to markdown
+collect-doc collect /path/to/document.pdf --no-convert
+
+# Preserve original file alongside markdown
+collect-doc collect /path/to/document.pdf --preserve-original
+
+# Verbose output for debugging
+collect-doc collect /path/to/document.pdf --verbose
+
+# Quiet mode (only errors)
+collect-doc collect /path/to/document.pdf --quiet
+```
+
+#### Batch Operations
+
+```bash
+# Collect multiple documents
+collect-doc collect-batch /path/to/doc1.pdf /path/to/doc2.docx https://example.com/doc3.pptx
+
+# Batch with options
+collect-doc collect-batch --destination ./output --preserve-original *.pdf
+```
+
+#### List Supported Formats
+
+```bash
+collect-doc formats
+```
+
+### Python API
+
+```python
+import asyncio
+from pathlib import Path
+from document_collection.core.service import DocumentCollectionService
+
+async def collect_document():
+    service = DocumentCollectionService()
+    
+    result = await service.collect_document(
+        source="/path/to/document.pdf",
+        destination_path=Path("./documents"),
+        convert_to_markdown=True,
+        preserve_original=False,
+        overwrite_existing=False
+    )
+    
+    if result.success:
+        print(f"Document collected: {result.output_path}")
+    else:
+        print(f"Collection failed: {result.errors}")
+
+# Run the async function
+asyncio.run(collect_document())
+```
+
+### Make Integration
+
+```bash
+# Set up development environment
+make setup
+
+# Run all tests
+make test
+
+# Run linting and type checking
+make lint
+
+# Generate coverage report
+make coverage
+
+# Collect a document using make (if implemented)
+make collect-doc FILE=/path/to/document.pdf
+
+# Clean build artifacts
+make clean
+```
 collect-doc /path/to/document.pdf
 
 # Collect from a URL

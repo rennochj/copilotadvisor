@@ -100,6 +100,8 @@ None specified at this time.
      - ruff for code formatting
      - pytest for testing
      - make for automation
+     - structlog for logging
+     - rich for enhanced command-line output
 
 
 ### 8.3 Other Considerations

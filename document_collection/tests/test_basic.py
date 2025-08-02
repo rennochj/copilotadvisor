@@ -64,19 +64,53 @@ def test_document_collection_service_init():
 
 
 @pytest.mark.asyncio
-async def test_document_collection_service_placeholder():
-    """Test DocumentCollectionService placeholder implementation."""
+async def test_document_collection_service_implementation():
+    """Test DocumentCollectionService implementation."""
     service = DocumentCollectionService()
 
+    # Test with non-existent file
     result = await service.collect_document(
-        source="test.pdf", destination_path=Path("./output")
+        source="nonexistent.pdf", destination_path=Path("./output")
     )
 
-    # Should return a failed result for placeholder implementation
+    # Should return a failed result because file doesn't exist
     assert result.success is False
-    assert result.source == "test.pdf"
+    assert result.source == "nonexistent.pdf"
     assert len(result.errors) > 0
-    assert "Not implemented yet" in result.errors[0]
+    assert "File not found" in result.errors[0] or "No such file" in result.errors[0]
+
+
+@pytest.mark.asyncio
+async def test_document_collection_service_with_actual_file():
+    """Test DocumentCollectionService with an actual file."""
+    from tempfile import NamedTemporaryFile
+
+    service = DocumentCollectionService()
+
+    # Create a temporary test file with a supported format
+    with NamedTemporaryFile(mode="w", suffix=".md", delete=False) as temp_file:
+        temp_file.write("# Test Document\n\nThis is a test markdown document.")
+        temp_file_path = temp_file.name
+
+    try:
+        result = await service.collect_document(
+            source=temp_file_path,
+            destination_path=Path("./test_output"),
+            convert_to_markdown=False,
+        )
+
+        # Should succeed
+        assert result.success is True
+        assert result.source == temp_file_path
+        assert result.output_path is not None
+        assert len(result.errors) == 0
+
+    finally:
+        # Clean up
+        import os
+
+        if os.path.exists(temp_file_path):
+            os.unlink(temp_file_path)
 
 
 def test_document_format_enum():

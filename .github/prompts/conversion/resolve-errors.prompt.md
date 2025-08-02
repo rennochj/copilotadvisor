@@ -1,9 +1,5 @@
 ---
-name: Review and Resolve Errors and Warnings
 description: Review and resolve errors and warnings in the provided code or documentation
-authors:
-  - Jim Conner
-tags: []
 ---
 
 # @resolve-errors

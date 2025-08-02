@@ -1,9 +1,5 @@
 ---
-name: Commit and Push all Changes
 description: Commit and push all changes to the repository
-authors:
-  - Jim Conner
-tags: []
 ---
 
 # @commit-push

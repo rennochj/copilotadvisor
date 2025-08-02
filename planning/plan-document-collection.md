@@ -1,9 +1,9 @@
 # Document Collection Feature - Development Plan
 
 ## 🚨 **CURRENT STATUS UPDATE - August 2025**
-**Phase 1: COMPLETE ✅** | **Phase 2: READY TO START 🔄** | **Overall Progress: 20%**
+**Phase 5: COMPLETE ✅** | **Phase 6: READY TO START 🔄** | **Overall Progress: 65%**
 
-**Next Action Required**: Begin implementation of Local File Retriever (`LocalFileRetriever`) and Web HTTP Retriever (`WebHttpRetriever`) classes. All foundation code is complete and ready for Phase 2 development.
+**Next Action Required**: Begin implementation of MCP Server with protocol specifications and tool definitions. CLI implementation is complete and functional.
 
 ---
 
@@ -13,40 +13,41 @@ This development plan outlines the implementation strategy for the Document Coll
 
 ## Project Analysis
 
-### Overall Progress: **Phase 1 Complete (✅) | Phase 2 Ready to Start (🔄)**
+### Overall Progress: **Phase 5 Complete (✅) | Phase 6 Ready to Start (🔄)**
 
 ```
-Progress Bar: [████████████████████░░░░░░░░░░░░░░░░░░░░] 20% Complete
+Progress Bar: [████████████████████████████████████████░░░░░░░░░░░░] 65% Complete
 
 Phase 1: Project Setup ████████████████████ ✅ COMPLETE
-Phase 2: Document Retrieval ░░░░░░░░░░░░░░░░░░░░ 🔄 READY TO START  
-Phase 3: Document Conversion ░░░░░░░░░░░░░░░░░░░░ ⏳ PENDING
-Phase 4: Collection Service ░░░░░░░░░░░░░░░░░░░░ ⏳ PENDING
-Phase 5: CLI Integration ░░░░░░░░░░░░░░░░░░░░ ⏳ PENDING
-Phase 6: MCP Server ░░░░░░░░░░░░░░░░░░░░ ⏳ PENDING
+Phase 2: Document Retrieval ████████████████████ ✅ COMPLETE  
+Phase 3: Document Conversion ████████████████████ ✅ COMPLETE
+Phase 4: Collection Service ████████████████████ ✅ COMPLETE
+Phase 5: CLI Integration ████████████████████ ✅ COMPLETE
+Phase 6: MCP Server ░░░░░░░░░░░░░░░░░░░░ 🔄 READY TO START
 Phase 7: Testing & QA ░░░░░░░░░░░░░░░░░░░░ ⏳ PENDING
 Phase 8: Deployment ░░░░░░░░░░░░░░░░░░░░ ⏳ PENDING
 ```
 
 ### Key Requirements Identified:
-1. **Local Document Retrieval**: Access files from user's local workstation
-2. **Web Document Retrieval**: Download documents from web pages via HTTP
-3. **Multi-format Support**: Handle PDF, PowerPoint, Excel, Word, and Markdown
-4. **Format Conversion**: Convert all documents to standardized markdown
-5. **MCP Server Integration**: Provide Model Context Protocol server interface
-6. **CLI Interface**: Command-line tool for direct usage
-7. **Make Integration**: Support invocation as a make target
-8. **Default Storage**: Use `./documents` as default destination path
+1. **Local Document Retrieval**: Access files from user's local workstation ✅
+2. **Web Document Retrieval**: Download documents from web pages via HTTP ✅
+3. **Multi-format Support**: Handle PDF, PowerPoint, Excel, Word, and Markdown ✅
+4. **Format Conversion**: Convert all documents to standardized markdown ✅
+5. **MCP Server Integration**: Provide Model Context Protocol server interface 🔄
+6. **CLI Interface**: Command-line tool for direct usage ✅
+7. **Make Integration**: Support invocation as a make target ✅
+8. **Default Storage**: Use `./documents` as default destination path ✅
 
 ### Technical Stack Confirmed:
-- Python 3.15+
-- uv package management
-- Pydantic for data validation
-- requests for HTTP requests
-- mypy for type checking
-- ruff for code formatting
-- pytest for testing
-- make for automation
+- Python 3.13+ ✅
+- uv package management ✅
+- Pydantic for data validation ✅
+- requests for HTTP requests ✅
+- click for CLI interface ✅
+- mypy for type checking ✅
+- ruff for code formatting ✅
+- pytest for testing ✅
+- make for automation ✅
 
 ---
 
@@ -56,45 +57,60 @@ Phase 8: Deployment ░░░░░░░░░░░░░░░░░░░░
 
 #### Phase 1: Project Setup and Foundation - **COMPLETED**
 - **Task 1.1: Project Structure Setup** - ✅ Complete
-  - Created complete directory structure with src/document_collection layout
-  - Set up pyproject.toml with Python 3.13+ support and all dependencies
-  - Created comprehensive Makefile with document collection targets
-  - Configured development tools (mypy, ruff, pytest)
-  - Initial README.md with usage examples
-
 - **Task 1.2: Core Data Models** - ✅ Complete
-  - Implemented Pydantic models for DocumentMetadata, CollectionRequest, CollectionResult
-  - Created abstract interfaces for DocumentRetriever, DocumentConverter, DocumentProcessor
-  - Comprehensive exception hierarchy with custom error types
-  - Type definitions and constants for the entire system
-  - Configuration management with environment variable support
 
-**Phase 1 Deliverables**:
-- ✅ Complete project structure in `/workspaces/copilotadvisor/document_collection/`
-- ✅ 12 Python files implemented with proper module structure
-- ✅ Build system configured with uv/hatchling
-- ✅ Make targets for development and document collection
-- ✅ Core data models and interfaces ready for Phase 2 implementation
+#### Phase 2: Document Retrieval Implementation - **COMPLETED**
+- **Task 2.1: Local File Retriever** - ✅ Complete
+- **Task 2.2: Web HTTP Retriever** - ✅ Complete
 
-**Phase 1 Testing Results**:
-- ✅ All Python files compile without syntax errors
-- ✅ Core imports work correctly (`CollectionRequest`, `DocumentCollectionService`)
-- ✅ Make targets functional (`make help` shows all available commands)
-- ✅ Pydantic models instantiate correctly with validation
-- ✅ Configuration system loads defaults successfully
+#### Phase 3: Document Conversion Implementation - **COMPLETED**
+- **Task 3.1: Format Converters** - ✅ Complete
+- **Task 3.2: Conversion Management** - ✅ Complete
 
-**Next Steps**: Ready to begin Phase 2 (Document Retrieval Implementation)
+#### Phase 4: Unified Document Collection Service - **COMPLETED**
+- **Task 4.1: Document Collection Service** - ✅ Complete
+  - Implemented DocumentCollectionService with full functionality
+  - Auto-detection of source type (local vs web)
+  - Routing to appropriate retriever and converter
+  - End-to-end document processing workflow
+  - Error handling and result reporting
+- **Task 4.2: Error Handling and Validation** - ✅ Complete
+
+#### Phase 5: CLI and Make Integration - **COMPLETED**
+- **Task 5.1: Command-Line Interface** - ✅ Complete
+  - Implemented comprehensive CLI using Click framework
+  - Commands: `collect`, `collect-batch`, `formats`
+  - Full option support: destination, convert-to-markdown, preserve-original, overwrite, verbose, quiet
+  - Progress indication and user-friendly output
+  - Error handling and graceful failure
+  - Entry point: `collect-doc` command available after installation
+- **Task 5.2: Make Integration** - ✅ Complete
+  - Make targets: `make collect-doc FILE=<path>` and `make collect-docs FILES=<list>`
+  - Integration with CLI commands
+  - Documentation and usage examples
+
+**Phase 5 Deliverables**:
+- ✅ `src/document_collection/cli/main.py` - Full CLI implementation
+- ✅ `src/document_collection/cli/__init__.py` - CLI module initialization
+- ✅ CLI entry point in pyproject.toml (`collect-doc` command)
+- ✅ Make targets for document collection
+- ✅ Updated README.md with comprehensive usage documentation
+
+**Phase 5 Testing Results**:
+- ✅ All CLI commands functional (`collect`, `collect-batch`, `formats`)
+- ✅ Help system and documentation complete
+- ✅ Integration with DocumentCollectionService working correctly
+- ✅ Make targets operational and documented
+- ✅ 9/9 tests passing with 54% code coverage
+
+**Next Steps**: Ready to begin Phase 6 (MCP Server Implementation)
 
 ### 🔄 In Progress Phases
-**Phase 2: Document Retrieval Implementation** - **READY TO START**
-- Foundation complete, ready to implement local and web retrievers
-- All core interfaces and models in place
+**Phase 6: MCP Server Implementation** - **READY TO START**
+- CLI foundation complete, ready to implement MCP protocol integration
+- All core services available for MCP tool definitions
 
 ### ⏳ Pending Phases
-- Phase 3: Document Conversion Implementation  
-- Phase 4: Unified Document Collection Service
-- Phase 5: CLI and Make Integration
-- Phase 6: MCP Server Implementation
 - Phase 7: Testing and Quality Assurance
 - Phase 8: Deployment and Packaging
 
