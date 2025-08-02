@@ -5,7 +5,7 @@ USER root
 RUN <<EOT
 
     apk update && apk add posix-libc-utils && ldconfig
-    apk add zsh zsh-vcs curl wget git vim make jq docker coreutils nodejs npm
+    apk add zsh zsh-vcs curl wget git vim make jq docker coreutils nodejs npm gh
     apk add sudo-rs shadow && echo "nonroot ALL = (ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers && echo y | pwck -q || true
 
     # Create docker group and add nonroot user to it
