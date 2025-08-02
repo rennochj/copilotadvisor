@@ -16,7 +16,8 @@ Errors and warnings can include:
 - Failed Tests
 - Documentation inconsistencies
 - Deprecated functions or methods
-- Linting issues
+- mypy type errors
+- Ruff linting issues
 - Formatting issues
 - Missing or incomplete comments
 - Unresolved references
