@@ -43,9 +43,8 @@ __all__ = [
     # Configuration
     "Configuration",
     "get_config",
-    "set_config", 
+    "set_config",
     "reset_config",
-    
     # Models
     "DocumentFormat",
     "DocumentMetadata",
@@ -55,14 +54,12 @@ __all__ = [
     "CollectionResult",
     "BatchCollectionRequest",
     "BatchCollectionResult",
-    
     # Interfaces
     "DocumentRetriever",
-    "DocumentConverter", 
+    "DocumentConverter",
     "DocumentProcessor",
     "ConfigurationProvider",
     "ProgressReporter",
-    
     # Exceptions
     "DocumentCollectionError",
     "RetrievalError",
@@ -73,7 +70,6 @@ __all__ = [
     "NetworkError",
     "FileSystemError",
     "ProcessingError",
-    
     # Types and Enums
     "LogLevel",
     "ProcessingStage",

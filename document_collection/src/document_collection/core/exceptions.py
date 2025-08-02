@@ -1,20 +1,20 @@
 """Custom exceptions for document collection."""
 
-from typing import Any, Optional
+from typing import Any
 
 
 class DocumentCollectionError(Exception):
     """Base exception for document collection operations."""
-    
+
     def __init__(
         self,
         message: str,
-        source: Optional[str] = None,
-        details: Optional[dict[str, Any]] = None
+        source: str | None = None,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize exception.
-        
+
         Args:
             message: Error message
             source: Source that caused the error
@@ -28,17 +28,17 @@ class DocumentCollectionError(Exception):
 
 class RetrievalError(DocumentCollectionError):
     """Exception raised when document retrieval fails."""
-    
+
     def __init__(
         self,
         message: str,
-        source: Optional[str] = None,
-        status_code: Optional[int] = None,
-        details: Optional[dict[str, Any]] = None
+        source: str | None = None,
+        status_code: int | None = None,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize retrieval error.
-        
+
         Args:
             message: Error message
             source: Source that failed to retrieve
@@ -51,18 +51,18 @@ class RetrievalError(DocumentCollectionError):
 
 class ConversionError(DocumentCollectionError):
     """Exception raised when document conversion fails."""
-    
+
     def __init__(
         self,
         message: str,
-        source: Optional[str] = None,
-        input_format: Optional[str] = None,
-        output_format: Optional[str] = None,
-        details: Optional[dict[str, Any]] = None
+        source: str | None = None,
+        input_format: str | None = None,
+        output_format: str | None = None,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize conversion error.
-        
+
         Args:
             message: Error message
             source: Source document that failed to convert
@@ -77,17 +77,17 @@ class ConversionError(DocumentCollectionError):
 
 class ValidationError(DocumentCollectionError):
     """Exception raised when input validation fails."""
-    
+
     def __init__(
         self,
         message: str,
-        field: Optional[str] = None,
-        value: Optional[Any] = None,
-        details: Optional[dict[str, Any]] = None
+        field: str | None = None,
+        value: Any | None = None,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize validation error.
-        
+
         Args:
             message: Error message
             field: Field that failed validation
@@ -101,17 +101,17 @@ class ValidationError(DocumentCollectionError):
 
 class ConfigurationError(DocumentCollectionError):
     """Exception raised when configuration is invalid."""
-    
+
     def __init__(
         self,
         message: str,
-        config_key: Optional[str] = None,
-        config_value: Optional[Any] = None,
-        details: Optional[dict[str, Any]] = None
+        config_key: str | None = None,
+        config_value: Any | None = None,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize configuration error.
-        
+
         Args:
             message: Error message
             config_key: Configuration key that caused the error
@@ -125,17 +125,17 @@ class ConfigurationError(DocumentCollectionError):
 
 class UnsupportedFormatError(DocumentCollectionError):
     """Exception raised when document format is not supported."""
-    
+
     def __init__(
         self,
         message: str,
-        format: Optional[str] = None,
-        supported_formats: Optional[list[str]] = None,
-        details: Optional[dict[str, Any]] = None
+        format: str | None = None,
+        supported_formats: list[str] | None = None,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize unsupported format error.
-        
+
         Args:
             message: Error message
             format: Unsupported format
@@ -149,18 +149,18 @@ class UnsupportedFormatError(DocumentCollectionError):
 
 class NetworkError(RetrievalError):
     """Exception raised when network operations fail."""
-    
+
     def __init__(
         self,
         message: str,
-        source: Optional[str] = None,
-        status_code: Optional[int] = None,
-        timeout: Optional[bool] = False,
-        details: Optional[dict[str, Any]] = None
+        source: str | None = None,
+        status_code: int | None = None,
+        timeout: bool | None = False,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize network error.
-        
+
         Args:
             message: Error message
             source: URL that caused the error
@@ -174,18 +174,18 @@ class NetworkError(RetrievalError):
 
 class FileSystemError(RetrievalError):
     """Exception raised when file system operations fail."""
-    
+
     def __init__(
         self,
         message: str,
-        source: Optional[str] = None,
-        permission_denied: Optional[bool] = False,
-        not_found: Optional[bool] = False,
-        details: Optional[dict[str, Any]] = None
+        source: str | None = None,
+        permission_denied: bool | None = False,
+        not_found: bool | None = False,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize file system error.
-        
+
         Args:
             message: Error message
             source: File path that caused the error
@@ -200,17 +200,17 @@ class FileSystemError(RetrievalError):
 
 class ProcessingError(DocumentCollectionError):
     """Exception raised when document processing fails."""
-    
+
     def __init__(
         self,
         message: str,
-        source: Optional[str] = None,
-        stage: Optional[str] = None,
-        details: Optional[dict[str, Any]] = None
+        source: str | None = None,
+        stage: str | None = None,
+        details: dict[str, Any] | None = None,
     ) -> None:
         """
         Initialize processing error.
-        
+
         Args:
             message: Error message
             source: Source that was being processed

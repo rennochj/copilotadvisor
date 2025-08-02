@@ -1,30 +1,31 @@
 """Type definitions for document collection."""
 
+from collections.abc import Callable
 from enum import Enum
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, TypeAlias, Union
+from typing import Any
 
 # Type aliases for common types
-PathLike: TypeAlias = Union[str, Path]
-ConfigDict: TypeAlias = Dict[str, Any]
-MetadataDict: TypeAlias = Dict[str, Any]
-ErrorList: TypeAlias = List[str]
-WarningList: TypeAlias = List[str]
+type PathLike = str | Path
+type ConfigDict = dict[str, Any]
+type MetadataDict = dict[str, Any]
+type ErrorList = list[str]
+type WarningList = list[str]
 
 # Callback type definitions
-ProgressCallback: TypeAlias = Callable[[int, int, str], None]
-CompletionCallback: TypeAlias = Callable[[bool, str], None]
-ErrorCallback: TypeAlias = Callable[[Exception, str], None]
+type ProgressCallback = Callable[[int, int, str], None]
+type CompletionCallback = Callable[[bool, str], None]
+type ErrorCallback = Callable[[Exception, str], None]
 
 # Document processing related types
-ConversionOptions: TypeAlias = Dict[str, Any]
-RetrievalOptions: TypeAlias = Dict[str, Any]
-ProcessingOptions: TypeAlias = Dict[str, Any]
+type ConversionOptions = dict[str, Any]
+type RetrievalOptions = dict[str, Any]
+type ProcessingOptions = dict[str, Any]
 
 
 class LogLevel(str, Enum):
     """Logging levels."""
-    
+
     DEBUG = "debug"
     INFO = "info"
     WARNING = "warning"
@@ -34,7 +35,7 @@ class LogLevel(str, Enum):
 
 class ProcessingStage(str, Enum):
     """Document processing stages."""
-    
+
     VALIDATION = "validation"
     RETRIEVAL = "retrieval"
     CONVERSION = "conversion"
@@ -45,7 +46,7 @@ class ProcessingStage(str, Enum):
 
 class RetryStrategy(str, Enum):
     """Retry strategies for failed operations."""
-    
+
     NONE = "none"
     LINEAR = "linear"
     EXPONENTIAL = "exponential"
@@ -54,7 +55,7 @@ class RetryStrategy(str, Enum):
 
 class OutputFormat(str, Enum):
     """Output format options."""
-    
+
     MARKDOWN = "markdown"
     JSON = "json"
     YAML = "yaml"
@@ -63,7 +64,7 @@ class OutputFormat(str, Enum):
 
 class CompressionType(str, Enum):
     """Compression types for archived documents."""
-    
+
     NONE = "none"
     GZIP = "gzip"
     ZIP = "zip"
@@ -73,7 +74,7 @@ class CompressionType(str, Enum):
 
 class AuthenticationType(str, Enum):
     """Authentication types for web retrieval."""
-    
+
     NONE = "none"
     BASIC = "basic"
     BEARER = "bearer"
@@ -83,7 +84,7 @@ class AuthenticationType(str, Enum):
 
 class ValidationLevel(str, Enum):
     """Validation levels for input checking."""
-    
+
     NONE = "none"
     BASIC = "basic"
     STRICT = "strict"
@@ -91,36 +92,36 @@ class ValidationLevel(str, Enum):
 
 
 # MCP (Model Context Protocol) related types
-MCPToolName: TypeAlias = str
-MCPToolSchema: TypeAlias = Dict[str, Any]
-MCPRequest: TypeAlias = Dict[str, Any]
-MCPResponse: TypeAlias = Dict[str, Any]
+type MCPToolName = str
+type MCPToolSchema = dict[str, Any]
+type MCPRequest = dict[str, Any]
+type MCPResponse = dict[str, Any]
 
 # CLI related types
-CLICommand: TypeAlias = str
-CLIArguments: TypeAlias = Dict[str, Any]
-CLIOptions: TypeAlias = Dict[str, Any]
+type CLICommand = str
+type CLIArguments = dict[str, Any]
+type CLIOptions = dict[str, Any]
 
 # Configuration related types
-ConfigurationSource: TypeAlias = Union[str, Path, Dict[str, Any]]
+type ConfigurationSource = str | Path | dict[str, Any]
 
 # File handling related types
-FileExtension: TypeAlias = str
-MimeType: TypeAlias = str
-FileSize: TypeAlias = int  # Size in bytes
-Checksum: TypeAlias = str  # SHA-256 hash
+type FileExtension = str
+type MimeType = str
+type FileSize = int  # Size in bytes
+type Checksum = str  # SHA-256 hash
 
 # Network related types
-URL: TypeAlias = str
-HTTPMethod: TypeAlias = str
-HTTPHeaders: TypeAlias = Dict[str, str]
-HTTPStatusCode: TypeAlias = int
-TimeoutSeconds: TypeAlias = float
+type URL = str
+type HTTPMethod = str
+type HTTPHeaders = dict[str, str]
+type HTTPStatusCode = int
+type TimeoutSeconds = float
 
 # Concurrency related types
-WorkerCount: TypeAlias = int
-QueueSize: TypeAlias = int
-BatchSize: TypeAlias = int
+type WorkerCount = int
+type QueueSize = int
+type BatchSize = int
 
 # Constants
 DEFAULT_DESTINATION = Path("./documents")

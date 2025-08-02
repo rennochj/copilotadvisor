@@ -14,18 +14,8 @@ Ensure that:
 - All changes are committed with clear, descriptive commit messages
 - The commit history is clean and follows the project's contribution guidelines
 - All errors and warnings have been resolved before committing including 
-  - Syntax errors
-  - Type errors
-  - Documentation inconsistencies
-  - Deprecated functions or methods
-  - Linting issues
-  - Formatting issues
-  - Missing or incomplete comments
-  - Unresolved references
-  - Failed Tests
-  - Unused variables or imports
-  - Security vulnerabilities
-
+  - @resolve-errors
+  
 **Focus Areas:**
 - Correctness of the code
 - Clarity of the documentation

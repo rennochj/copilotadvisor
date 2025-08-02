@@ -13,13 +13,13 @@ Review all source code and documentation for errors and warnings and resolve the
 Errors and warnings can include:
 - Syntax errors
 - Type errors
+- Failed Tests
 - Documentation inconsistencies
 - Deprecated functions or methods
 - Linting issues
 - Formatting issues
 - Missing or incomplete comments
 - Unresolved references
-- Failed Tests
 - Unused variables or imports
 - Security vulnerabilities  
 
