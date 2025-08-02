@@ -1,8 +1,6 @@
 ---
 name: Update the development Plan
 description: Update the development plan for the document collection tool
-authors:
-  - Jim Conner
 tags: []
 ---
 

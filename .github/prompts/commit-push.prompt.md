@@ -6,7 +6,7 @@ authors:
 tags: []
 ---
 
-# @update-plan
+# @commit-push
 
 Commit all changes made to the repository and push them to the remote repository.
 

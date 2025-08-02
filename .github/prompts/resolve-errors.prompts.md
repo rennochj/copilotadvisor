@@ -6,7 +6,7 @@ authors:
 tags: []
 ---
 
-# @update-plan
+# @resolve-errors
 
 Review all source code and documentation for errors and warnings and resolve them as necessary.
 
