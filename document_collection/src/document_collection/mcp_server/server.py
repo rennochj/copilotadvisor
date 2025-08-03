@@ -88,6 +88,7 @@ async def collect_document(
 
     Returns:
         Dictionary containing collection results and status information
+
     """
     logger.info("MCP collect_document called", url=url, output_dir=output_dir)
 
@@ -154,6 +155,7 @@ async def collect_batch(
 
     Returns:
         Dictionary containing batch collection results and status information
+
     """
     logger.info("MCP collect_batch called", url_count=len(urls), output_dir=output_dir)
 
@@ -226,6 +228,7 @@ async def list_formats() -> dict[str, Any]:
 
     Returns:
         Dictionary containing information about supported formats
+
     """
     logger.info("MCP list_formats called")
 
@@ -306,6 +309,7 @@ def run_server_http(port: int = 8000) -> None:
 
     Args:
         port: Port number for HTTP server (default: 8000)
+
     """
     logger.info("Starting Document Collection MCP Server (HTTP)", port=port)
 

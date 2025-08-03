@@ -1,4 +1,4 @@
-"""Document Collection Package
+"""Document Collection Package.
 
 A unified tool and MCP server for collecting documents from local workstations
 and web sources, converting them to markdown format for architectural reviews.

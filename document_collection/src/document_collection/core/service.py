@@ -37,8 +37,7 @@ class DocumentCollectionService:
     async def collect_document(
         self, source: str, destination_path: Path | None = None, **options: Any
     ) -> CollectionResult:
-        """
-        Collect a single document.
+        """Collect a single document.
 
         Args:
             source: Source file path or URL
@@ -50,6 +49,7 @@ class DocumentCollectionService:
 
         Raises:
             DocumentCollectionError: If collection fails
+
         """
         start_time = time.time()
         logger.debug("Collecting document from source: %s", source)
@@ -161,8 +161,7 @@ class DocumentCollectionService:
     async def collect_documents(
         self, sources: list[str], destination_path: Path | None = None, **options: Any
     ) -> list[CollectionResult]:
-        """
-        Collect multiple documents.
+        """Collect multiple documents.
 
         Args:
             sources: List of source file paths or URLs
@@ -171,6 +170,7 @@ class DocumentCollectionService:
 
         Returns:
             List of collection results
+
         """
         results = []
         for source in sources:

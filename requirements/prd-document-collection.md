@@ -76,6 +76,25 @@ Personas:
      - The tool must convert documents to markdown format without data loss
      - The tool must save the reformatted documents in the specified location
 
+### 6.2
+**Critical features that must be included in the initial release.**
+1. **Requirement 1**: Convert documents to a standardized markdown format for analysis
+   - **Processing Steps**:
+     1. Select the collected file and determine the correct converter based on the file type.
+     2. Use the appropriate converter to convert the document to markdown format.
+        - A Converter for PDF, DOCX, PPTX, XLSX, and Markdown formats. 
+     3. Save the converted markdown file in the specified location.
+     4. The conversion should convert all tables, images, and text to markdown format.
+        - The conversion should preserve the original document structure and formatting as much as possible.
+        - images should be stored in a directory named `images` in the same location as the markdown file.
+        - only convert images that exceed a minimum size, for example of 100x100 pixels.
+        - include a flag if image conversion is performed
+   - **Outputs**: 
+     - The reformatted document is saved in the specified location
+   - **Acceptance Criteria**:
+     - The tool must successfully convert documents to markdown format without data loss
+     - The tool must save the reformatted documents in the specified location
+     - The tool must support PDF, DOCX, PPTX, XLSX, and Markdown formats
 
 ---
 

@@ -9,9 +9,11 @@ class ConverterManager:
     """Manages document conversion operations."""
 
     def __init__(self) -> None:
+        """Initialize the converter manager."""
         self.factory = ConverterFactory()
 
     async def convert_batch(self, sources: list[str], destination: Path) -> list[Path]:
+        """Convert multiple documents in batch."""
         results = []
         for source in sources:
             converter = self.factory.get_converter(source)

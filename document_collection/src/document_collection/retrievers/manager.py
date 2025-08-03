@@ -9,9 +9,11 @@ class DocumentRetrievalManager:
     """Manages document retrieval operations."""
 
     def __init__(self) -> None:
+        """Initialize the retriever manager."""
         self.factory = RetrieverFactory()
 
     async def retrieve_batch(self, sources: list[str], destination: Path) -> list[Path]:
+        """Retrieve multiple documents in batch."""
         results = []
         for source in sources:
             retriever = self.factory.get_retriever(source)

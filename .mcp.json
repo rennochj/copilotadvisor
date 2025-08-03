@@ -1,5 +1,10 @@
 {
   "mcpServers": {
+    "document-collection": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "document_collection.cli.main", "mcp-server"],
+      "cwd": "/workspaces/copilotadvisor/documents"
+    },
     "context7": {
       "type": "stdio",
       "command": "npx",

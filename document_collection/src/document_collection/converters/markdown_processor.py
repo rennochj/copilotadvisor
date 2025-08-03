@@ -10,9 +10,11 @@ class MarkdownProcessor(DocumentConverter):
     """Process and validate Markdown documents."""
 
     def can_convert(self, file_path: Path) -> bool:
+        """Check if this processor can handle Markdown files."""
         return str(file_path).lower().endswith(".md")
 
     def get_supported_formats(self) -> list[str]:
+        """Return list of supported formats."""
         return ["md"]
 
     async def convert(self, input_path: Path, output_path: Path, **kwargs: Any) -> Path:

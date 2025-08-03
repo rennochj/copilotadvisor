@@ -21,11 +21,11 @@ class Configuration:
     """Configuration manager for document collection."""
 
     def __init__(self, config_file: str | Path | None = None) -> None:
-        """
-        Initialize configuration.
+        """Initialize configuration.
 
         Args:
             config_file: Optional path to configuration file
+
         """
         self._config: ConfigDict = {}
         self._load_defaults()
@@ -76,11 +76,11 @@ class Configuration:
         }
 
     def _load_from_file(self, config_file: str | Path) -> None:
-        """
-        Load configuration from file.
+        """Load configuration from file.
 
         Args:
             config_file: Path to configuration file
+
         """
         config_path = Path(config_file)
 
@@ -151,8 +151,7 @@ class Configuration:
                     self._config[config_key] = env_value
 
     def get(self, key: str, default: Any = None) -> Any:
-        """
-        Get configuration value.
+        """Get configuration value.
 
         Args:
             key: Configuration key
@@ -160,43 +159,44 @@ class Configuration:
 
         Returns:
             Configuration value
+
         """
         return self._config.get(key, default)
 
     def set(self, key: str, value: Any) -> None:
-        """
-        Set configuration value.
+        """Set configuration value.
 
         Args:
             key: Configuration key
             value: Configuration value
+
         """
         self._config[key] = value
 
     def get_all(self) -> ConfigDict:
-        """
-        Get all configuration values.
+        """Get all configuration values.
 
         Returns:
             Dictionary of all configuration values
+
         """
         return self._config.copy()
 
     def update(self, config: ConfigDict) -> None:
-        """
-        Update configuration with new values.
+        """Update configuration with new values.
 
         Args:
             config: Dictionary of configuration values to update
+
         """
         self._config.update(config)
 
     def save_to_file(self, config_file: str | Path) -> None:
-        """
-        Save current configuration to file.
+        """Save current configuration to file.
 
         Args:
             config_file: Path to save configuration file
+
         """
         config_path = Path(config_file)
 

@@ -51,7 +51,7 @@ format:
 
 # Run type checking
 type-check:
-	mypy src
+	MYPYPATH=src mypy -p document_collection
 
 # Clean build artifacts
 clean:

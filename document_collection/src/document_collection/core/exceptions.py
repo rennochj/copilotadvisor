@@ -12,13 +12,13 @@ class DocumentCollectionError(Exception):
         source: str | None = None,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize exception.
+        """Initialize exception.
 
         Args:
             message: Error message
             source: Source that caused the error
             details: Additional error details
+
         """
         super().__init__(message)
         self.message = message
@@ -36,14 +36,14 @@ class RetrievalError(DocumentCollectionError):
         status_code: int | None = None,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize retrieval error.
+        """Initialize retrieval error.
 
         Args:
             message: Error message
             source: Source that failed to retrieve
             status_code: HTTP status code (for web retrievals)
             details: Additional error details
+
         """
         super().__init__(message, source, details)
         self.status_code = status_code
@@ -60,8 +60,7 @@ class ConversionError(DocumentCollectionError):
         output_format: str | None = None,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize conversion error.
+        """Initialize conversion error.
 
         Args:
             message: Error message
@@ -69,6 +68,7 @@ class ConversionError(DocumentCollectionError):
             input_format: Input document format
             output_format: Target output format
             details: Additional error details
+
         """
         super().__init__(message, source, details)
         self.input_format = input_format
@@ -85,14 +85,14 @@ class ValidationError(DocumentCollectionError):
         value: Any | None = None,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize validation error.
+        """Initialize validation error.
 
         Args:
             message: Error message
             field: Field that failed validation
             value: Value that failed validation
             details: Additional error details
+
         """
         super().__init__(message, details=details)
         self.field = field
@@ -109,14 +109,14 @@ class ConfigurationError(DocumentCollectionError):
         config_value: Any | None = None,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize configuration error.
+        """Initialize configuration error.
 
         Args:
             message: Error message
             config_key: Configuration key that caused the error
             config_value: Configuration value that caused the error
             details: Additional error details
+
         """
         super().__init__(message, details=details)
         self.config_key = config_key
@@ -133,14 +133,14 @@ class UnsupportedFormatError(DocumentCollectionError):
         supported_formats: list[str] | None = None,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize unsupported format error.
+        """Initialize unsupported format error.
 
         Args:
             message: Error message
             format: Unsupported format
             supported_formats: List of supported formats
             details: Additional error details
+
         """
         super().__init__(message, details=details)
         self.format = format
@@ -158,8 +158,7 @@ class NetworkError(RetrievalError):
         timeout: bool | None = False,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize network error.
+        """Initialize network error.
 
         Args:
             message: Error message
@@ -167,6 +166,7 @@ class NetworkError(RetrievalError):
             status_code: HTTP status code
             timeout: Whether error was due to timeout
             details: Additional error details
+
         """
         super().__init__(message, source, status_code, details)
         self.timeout = timeout
@@ -183,8 +183,7 @@ class FileSystemError(RetrievalError):
         not_found: bool | None = False,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize file system error.
+        """Initialize file system error.
 
         Args:
             message: Error message
@@ -192,6 +191,7 @@ class FileSystemError(RetrievalError):
             permission_denied: Whether error was due to permission denied
             not_found: Whether error was due to file not found
             details: Additional error details
+
         """
         super().__init__(message, source, details=details)
         self.permission_denied = permission_denied
@@ -208,14 +208,14 @@ class ProcessingError(DocumentCollectionError):
         stage: str | None = None,
         details: dict[str, Any] | None = None,
     ) -> None:
-        """
-        Initialize processing error.
+        """Initialize processing error.
 
         Args:
             message: Error message
             source: Source that was being processed
             stage: Processing stage where error occurred
             details: Additional error details
+
         """
         super().__init__(message, source, details)
         self.stage = stage

@@ -67,8 +67,7 @@ def collect(
     verbose: bool,
     quiet: bool,
 ) -> None:
-    """
-    Collect a single document from a file path or URL.
+    """Collect a single document from a file path or URL.
 
     SOURCE can be:
     - Local file path: /path/to/document.pdf
@@ -153,8 +152,7 @@ def collect_batch(
     verbose: bool,
     quiet: bool,
 ) -> None:
-    """
-    Collect multiple documents from file paths or URLs.
+    """Collect multiple documents from file paths or URLs.
 
     SOURCES can be multiple arguments:
     - Local files: /path/to/doc1.pdf /path/to/doc2.docx
@@ -360,7 +358,7 @@ def mcp_server(transport: str, port: int) -> None:
 
 
 def main() -> None:
-    """Main entry point for the CLI."""
+    """Serve as the main entry point for the CLI."""
     cli()
 
 

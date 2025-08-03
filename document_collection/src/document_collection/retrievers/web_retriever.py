@@ -12,15 +12,18 @@ class WebHttpRetriever(DocumentRetriever):
     """Retrieve documents from web HTTP/HTTPS sources."""
 
     def can_handle(self, source: str) -> bool:
+        """Check if this retriever can handle the given source."""
         return source.lower().startswith(("http://", "https://"))
 
     def get_metadata(self, source: str) -> None:
+        """Get metadata for the document at the given web source."""
         # For web sources, metadata is limited before download
         return None
 
     async def retrieve(
         self, source: str, destination: Path, request_id: str = "", **kwargs: Any
     ) -> Path:
+        """Retrieve a document from web HTTP/HTTPS source to destination directory."""
         # Validate URL
         if not source.lower().startswith(("http://", "https://")):
             raise ValueError(f"Invalid URL: {source}")

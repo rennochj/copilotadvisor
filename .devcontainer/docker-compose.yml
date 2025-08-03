@@ -8,3 +8,4 @@ services:
       - ../..:/workspaces:cached
       - ~/.gitconfig:/home/nonroot/.gitconfig:cached
       - /var/run/docker.sock:/var/run/docker.sock
+      - /Users/rennochj/Data:/data:cached

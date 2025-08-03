@@ -75,6 +75,10 @@ addopts = [
 
 [tool.mypy]
 python_version = "3.13"
+mypy_path = "src"
+namespace_packages = true
+explicit_package_bases = true
+exclude = ["build/", "dist/", ".venv/"]
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -112,5 +116,9 @@ ignore = [
 
 [dependency-groups]
 dev = [
+    "mypy>=1.17.1",
+    "ruff>=0.12.7",
+    "types-openpyxl>=3.1.5.20250602",
     "types-pyyaml>=6.0.12.20250516",
+    "types-requests>=2.32.4.20250611",
 ]

@@ -16,9 +16,11 @@ class LocalFileRetriever(DocumentRetriever):
     """Retrieve documents from the local filesystem."""
 
     def can_handle(self, source: str) -> bool:
+        """Check if this retriever can handle the given source."""
         return not source.lower().startswith(("http://", "https://"))
 
     def get_metadata(self, source: str) -> DocumentMetadata | None:
+        """Get metadata for the document at the given source path."""
         path = Path(source)
         if not path.exists() or not path.is_file():
             return None
@@ -38,6 +40,7 @@ class LocalFileRetriever(DocumentRetriever):
     async def retrieve(
         self, source: str, destination: Path, request_id: str = "", **kwargs: Any
     ) -> Path:
+        """Retrieve a document from local filesystem to destination directory."""
         source_path = Path(source)
         if not source_path.exists():
             raise FileNotFoundError(f"File not found: {source_path}")

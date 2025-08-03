@@ -10,6 +10,7 @@ class RetrieverFactory:
 
     @staticmethod
     def get_retriever(source: str) -> DocumentRetriever:
+        """Get appropriate retriever instance based on source type."""
         if source.lower().startswith(("http://", "https://")):
             return WebHttpRetriever()
         return LocalFileRetriever()
